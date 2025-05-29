@@ -102,7 +102,7 @@ const Todo = () => {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <div className="flex items-center gap-6 justify-center">
-                                                        <button className="" onClick={(e) => {
+                                                        <button className="" onClick={() => {
                                                             handleDone(task.id);
                                                         }}>
                                                             {task.isDone == true ?
@@ -110,7 +110,7 @@ const Todo = () => {
                                                                     <i className="ri-checkbox-circle-line" />
                                                                 </span>
                                                                 :
-                                                                <span className="text-2xl text-green-200">
+                                                                <span className="text-2xl text-red-400">
                                                                     <i className="ri-checkbox-circle-line" />
                                                                 </span>
                                                             }
