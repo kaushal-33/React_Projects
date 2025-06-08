@@ -1,0 +1,463 @@
+* {
+    outline: none;
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --bg-primary-color: #d1a132;
+    --font-primary-color: #0A2C0F;
+}
+
+.py-100 {
+    padding-block: 100px;
+}
+
+.my-bg-color {
+    background-color: var(--bg-primary-color);
+}
+
+.my-secondary-bg-color {
+    background-color: var(--font-primary-color);
+}
+
+.text-warning {
+    color: var(--bg-primary-color) !important;
+}
+
+.my-font-color {
+    color: var(--font-primary-color);
+}
+
+.circle-50px {
+    width: 50px;
+    height: 50px;
+}
+
+.transition {
+    transition: .3s all linear;
+}
+
+
+/* header */
+
+header {
+    background-image: url(images/hero-bg.jpg);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #0A2C0F;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+}
+
+.navbar-toggler {
+    box-shadow: none !important;
+    background-color: var(--bg-primary-color) !important;
+}
+
+.navbar-toggler-icon{
+    filter: invert(100%) !important;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    transition: .3s all linear;
+    cursor: pointer;
+}
+
+.social-icon:hover{
+    color: var(--bg-primary-color) !important;
+    border-color: var(--bg-primary-color) !important;
+}
+
+.hero-btn {
+    transition: .3s all linear;
+}
+
+.name-btn {
+    text-transform: capitalize;
+    background-color: var(--bg-primary-color);
+    display: flex;
+    padding-block: 13px;
+    padding-inline: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+.rotate-btn {
+    text-transform: capitalize;
+    background-color: #FFFFFF1A;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    transition: .3s all linear;
+}
+
+.name-btn::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    left: 0;
+    top: 0;
+    transition: .3s all linear;
+    border-radius: 50px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.hero-btn:hover .name-btn::after {
+    opacity: 1;
+    visibility: visible;
+    transform: rotateY(180deg);
+}
+
+.hero-btn:hover .rotate-btn {
+    transform: rotate(90deg);
+}
+
+.name-btn:hover span {
+    color: black;
+}
+
+.hero-btn.secondary .name-btn::after {
+    background-color: var(--font-primary-color);
+}
+
+.hero-btn.secondary .name-btn:hover span {
+    color: white;
+}
+
+.hero-btn.secondary .rotate-btn {
+    background-color: #e2e1da;
+    color: black;
+}
+
+.simple-hover{
+    transition: .3s all ease-in-out;
+    cursor: pointer;
+}
+
+.simple-hover:hover{
+    color: var(--bg-primary-color) !important;
+}
+
+/* hero section */
+
+.hero-sec {
+    background-image: url(/images/hero-bg.jpg);
+    /* background-position: right; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-attachment: fixed;
+}
+
+.hero-sec::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #0A2C0F;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+}
+
+.hero-stamp {
+    max-width: 140px;
+}
+
+.rotate-stamp {
+    transform-origin: center;
+    animation: rotation infinite 20s linear;
+}
+
+.secondary-stamp {
+    max-width: 140px;
+    transform-origin: center;
+    animation: rotation infinite 20s linear;
+}
+
+@keyframes rotation {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* why choose us */
+
+.circle-60px {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.circle-60px::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: var(--font-primary-color);
+    transition: .3s all linear;
+}
+
+.discription-card:hover .circle-60px::after {
+    width: 100%;
+    height: 100%;
+}
+
+.why-choose-img {
+    left: -110px;
+    bottom: -2px;
+}
+
+
+
+/* what we do */
+
+.what-we-image-1 {
+    position: absolute;
+    max-width: 500px;
+}
+
+.what-we-image-2 {
+    position: absolute;
+    max-width: 400px;
+}
+
+.what-we-image-3 {
+    max-width: 170px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.h-500px {
+    height: 500px;
+}
+
+
+
+/* our key points */
+
+.circle-80px {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.circle-80px::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: var(--font-primary-color);
+    transition: .3s all linear;
+}
+
+.key-card:hover .circle-80px::after {
+    width: 100%;
+    height: 100%;
+}
+
+/* FAQ */
+
+.faq-label {
+    max-width: 200px;
+    bottom: 40px;
+    right: 40px;
+}
+
+.accordion-button {
+    padding-block: 18px !important;
+    font-weight: 700;
+    border-radius: 2rem !important;
+}
+
+.accordion-button:focus {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: var(--bg-primary-color);
+    color: white !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--bg-primary-color) !important;
+    color: white;
+    z-index: 1;
+}
+
+.accordion-button.collapsed {
+    background-color: white !important;
+    color: black !important;
+    transition: 1s all linear !important;
+}
+
+
+.accordion-button:not(.collapsed)::after {
+    filter: brightness(0) invert(1);
+}
+
+/* testimonails */
+
+.testimonial-sec {
+    background-color: var(--font-primary-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-sec::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/testimonial-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scale(1.5);
+    top: 0;
+    left: 0;
+}
+
+.custom-swiper-button-prev,
+.custom-swiper-button-next {
+    width: 40px;
+    height: 40px;
+    background-color: #234227;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    transition: .3s all linear;
+}
+
+.custom-swiper-button-next:hover,
+.custom-swiper-button-prev:hover {
+    background-color: var(--bg-primary-color);
+}
+
+/* blogs */
+
+.blog-card img {
+    transition: .3s all ease-in-out;
+}
+
+.blog-card:hover img {
+    transform: scale(1.1);
+}
+
+/* footer */
+
+
+footer {
+    background-color: var(--font-primary-color);
+}
+
+.footer-link {
+    transition: .3s all linear;
+    cursor: pointer;
+}
+
+.footer-link:hover {
+    padding-left: 5px;
+    color: var(--bg-primary-color);
+}
+
+.footer-input{
+    width: 100%;
+    padding: 20px 15px;
+    background-color: #234227;
+    border: none;
+    border-radius: 50px;
+    color: white;
+}
+
+.footer-input::placeholder{
+    color: rgba(255, 255, 255, 0.725);
+}
+
+.footer-btn{
+    background-color: #d1a132;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 30px;
+    transition: .3s all linear;
+}
+
+.footer-btn:hover{
+    color: black;
+}
+
+/* media query */
+
+@media (max-width: 992px) {
+    .why-choose-img {
+        max-width: 100px;
+        left: 35%;
+        bottom: 0;
+    }
+
+    .py-100 {
+        padding-block: 50px;
+    }
+
+}
+
+@media (min-width:1400px) {
+    .what-we-image-3 {
+        bottom: 50px;
+        left: 100px;
+    }
+}
+
+@media (max-width:576px) {
+
+    .h-500px {
+        height: auto;
+    }
+
+    .what-we-image-1 {
+        position: static;
+        margin: auto;
+    }
+
+    .what-we-image-3 {
+        max-width: 100px;
+        bottom: -20px;
+    }
+
+    .what-we-image-2 {
+        max-width: 400px;
+        display: none;
+    }
+
+    .faq-label {
+        bottom: 10px;
+        right: 10px;
+    }
+}
