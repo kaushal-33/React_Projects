@@ -1,26 +1,112 @@
+import { useState } from "react"
 
 const StudentForm = () => {
+
+    const [studentInput, setStudentInput] = useState({
+        name: "", course: "1", contact: "", password: "", cPassword: "", gender: ""
+    });
+
+    const [error, setError] = useState({});
+    const [gender, setgender] = useState("")
+    function handleChange(e) {
+        setStudentInput({ ...studentInput, [e.target.id]: e.target.value, })
+        setError({ ...error, [e.target.id]: "" })
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        let objError = {};
+
+        if (studentInput.name.trim() === "") objError.name = "Please enter your name...";
+        if (studentInput.contact.trim() === "" || studentInput.contact.length != 10) objError.contact = "Please enter valid number...";
+        if (studentInput.password.trim() <= 8) objError.password = "Password must be greater than 7 character or long...";
+        if (studentInput.password !== studentInput.cPassword) objError.cPassword = "Passwords do not match...";
+        setError(objError)
+
+        if (Object.keys(objError).length === 0) {
+            console.log("form submited")
+            setStudentInput({ name: "", course: "1", contact: "", password: "", cPassword: "" })
+        } else {
+            return;
+        }
+    }
+
+    console.log(studentInput)
     return (
-        <div className="container mx-auto">
-            <form className="mt-20">
-                <div className="flex flex-wrap  mb-6">
-                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
-                            First Name
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" />
-                        <p className="text-red-500 text-xs italic">Please fill out this field.</p>
-                    </div>
-                    <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
-                            Last Name
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe" />
-                    </div>
+        <div className="w-3/12 p-5 bg-[#463aca] h-full m-5 rounded-xl">
+            <form className="" onSubmit={handleSubmit}>
+                <div className="my-5">
+                    <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2 cursor-pointer" htmlFor="name">
+                        Name
+                    </label>
+                    <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="name" type="text" placeholder="John Doe" onChange={handleChange}
+                        value={studentInput.name} />
+                    {
+                        error.name && <p className="text-red-500 text-xs italic">{error.name}</p>
+                    }
                 </div>
+                {/* gender */}
+                <div className="flex justify-evenly my-5 border-b py-2 shadow-lg">
+                    <label className="flex items-center space-x-2">
+                        <input type="radio" name="gender" defaultValue="male" className="accent-[#463aca] w-4 h-4" />
+                        <span className="text-white">Male</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                        <input type="radio" name="gender" defaultValue="female" className="accent-[#463aca] w-4 h-4" />
+                        <span className="text-white">Female</span>
+                    </label>
+                </div>
+                {/* course */}
+                <div className="mt-14 mb-8">
+                    <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2 cursor-pointer" htmlFor="course">
+                        course
+                    </label>
+                    <select name="course" className="capitalize w-full border-0 py-2 px-4 focus:bg-white focus:text-black bg-transparent  shadow-xl border-b focus:border-0 text-white" id="course" onChange={handleChange} value={studentInput.course}>
+                        <option value="1">full-stack developer</option>
+                        <option value="2">UI/UX graphic design</option>
+                        <option value="3">AI/ML data science</option>
+                        <option value="4">animation</option>
+                    </select>
+                </div>
+                {/* contact */}
+                <div className="mt-8">
+                    <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2 cursor-pointer" htmlFor="contact">
+                        CONTACT
+                    </label>
+                    <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="contact" type="number" placeholder="0123456789" onChange={handleChange}
+                        value={studentInput.contact} />
+                    {
+                        error.contact && <p className="text-red-500 text-xs italic">{error.contact}</p>
+                    }
+                </div>
+                {/* password */}
+                <div className="mt-14">
+                    <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2 cursor-pointer" htmlFor="password">
+                        password
+                    </label>
+                    <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="password" type="password" placeholder="* * * * * * * *" onChange={handleChange}
+                        value={studentInput.password} />
+                    {
+                        error.password && <p className="text-red-500 text-xs italic">{error.password}</p>
+                    }
+                </div>
+                {/* confirm password */}
+                <div className="">
+                    <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2 cursor-pointer" htmlFor="cPassword">
+                        confirm password
+                    </label>
+                    <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="cPassword" type="password" placeholder="* * * * * * * *" onChange={handleChange}
+                        value={studentInput.cPassword} />
+                    {
+                        error.cPassword && <p className="text-red-500 text-xs italic">{error.cPassword}</p>
+                    }
+                </div>
+                <button className="capitalize bg-white px-8 py-3 rounded-full">
+                    submit
+                </button>
             </form>
         </div>
-
     )
 }
 

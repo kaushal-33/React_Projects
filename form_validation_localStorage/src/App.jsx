@@ -2,7 +2,7 @@ import StudentForm from "./components/StudentForm"
 
 const App = () => {
   return (
-    <div>
+    <div className="h-screen">
       <StudentForm />
     </div>
   )
