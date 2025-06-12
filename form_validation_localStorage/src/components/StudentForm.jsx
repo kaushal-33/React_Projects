@@ -1,13 +1,12 @@
 import { useState } from "react"
 
-const StudentForm = () => {
+const StudentForm = ({ addStudent }) => {
 
     const [studentInput, setStudentInput] = useState({
         name: "", course: "1", contact: "", password: "", cPassword: "", gender: ""
     });
 
     const [error, setError] = useState({});
-    const [gender, setgender] = useState("")
     function handleChange(e) {
         setStudentInput({ ...studentInput, [e.target.id]: e.target.value, })
         setError({ ...error, [e.target.id]: "" })
@@ -19,20 +18,19 @@ const StudentForm = () => {
         let objError = {};
 
         if (studentInput.name.trim() === "") objError.name = "Please enter your name...";
+        if (studentInput.gender === "") objError.gender = "Please select your gender...";
         if (studentInput.contact.trim() === "" || studentInput.contact.length != 10) objError.contact = "Please enter valid number...";
         if (studentInput.password.trim() <= 8) objError.password = "Password must be greater than 7 character or long...";
         if (studentInput.password !== studentInput.cPassword) objError.cPassword = "Passwords do not match...";
         setError(objError)
 
         if (Object.keys(objError).length === 0) {
-            console.log("form submited")
+            addStudent(studentInput);
             setStudentInput({ name: "", course: "1", contact: "", password: "", cPassword: "" })
         } else {
             return;
         }
     }
-
-    console.log(studentInput)
     return (
         <div className="w-3/12 p-5 bg-[#463aca] h-full m-5 rounded-xl">
             <form className="" onSubmit={handleSubmit}>
@@ -49,13 +47,20 @@ const StudentForm = () => {
                 {/* gender */}
                 <div className="flex justify-evenly my-5 border-b py-2 shadow-lg">
                     <label className="flex items-center space-x-2">
-                        <input type="radio" name="gender" defaultValue="male" className="accent-[#463aca] w-4 h-4" />
+                        <input type="radio" name="gender" defaultValue="male" className="accent-[#463aca] w-4 h-4" onChange={(e) => {
+                            setStudentInput({ ...studentInput, [e.target.name]: e.target.value })
+                        }} />
                         <span className="text-white">Male</span>
                     </label>
                     <label className="flex items-center space-x-2">
-                        <input type="radio" name="gender" defaultValue="female" className="accent-[#463aca] w-4 h-4" />
+                        <input type="radio" name="gender" defaultValue="female" className="accent-[#463aca] w-4 h-4" onChange={(e) => {
+                            setStudentInput({ ...studentInput, [e.target.name]: e.target.value })
+                        }} />
                         <span className="text-white">Female</span>
                     </label>
+                    {
+                        error.gender && <p className="text-red-500 text-xs italic">{error.gender}</p>
+                    }
                 </div>
                 {/* course */}
                 <div className="mt-14 mb-8">
