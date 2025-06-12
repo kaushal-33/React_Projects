@@ -25,7 +25,7 @@ const StudentForm = ({ addStudent }) => {
         setError(objError)
 
         if (Object.keys(objError).length === 0) {
-            addStudent(studentInput);
+            addStudent({ ...studentInput, id: Date.now() });
             setStudentInput({ name: "", course: "1", contact: "", password: "", cPassword: "" })
         } else {
             return;

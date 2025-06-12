@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import StudentForm from "./components/StudentForm"
+import DisplayStudent from "./components/displayStudent"
 
 const App = () => {
 
@@ -16,11 +17,10 @@ const App = () => {
     setStudents([...students, student]);
   }
 
-  console.log(students)
-
   return (
-    <div className="h-[80vh]">
+    <div className="h-[80vh] flex">
       <StudentForm addStudent={addStudent} />
+      <DisplayStudent studentArr={students} />
     </div>
   )
 }
