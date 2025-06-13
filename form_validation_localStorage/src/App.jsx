@@ -14,11 +14,7 @@ const App = () => {
   }, [students])
 
   function addStudent(student) {
-    if (updateStudent) {
-      setStudents([...students, updateStudent])
-    } else {
-      setStudents([...students, student]);
-    }
+    setStudents([...students, student]);
   }
 
   function deleteStudent(id) {
@@ -33,18 +29,20 @@ const App = () => {
     setUpdateStudent(editStudent);
   }
 
-  function updatedStudent(updatedStudent) {
-
-
-
-
+  function updateExistingStudent(updatedStudent) {
+    const updatedList = students.map((student) =>
+      student.id === updatedStudent.id ? updatedStudent : student
+    );
+    setStudents(updatedList);
+    setUpdateStudent(null);
   }
 
   return (
-    <div className="flex py-5">
-      <StudentForm addStudent={addStudent} editStudent={updateStudent} />
+    <div className="md:h-screen flex flex-col lg:flex-row py-5 px-3 gap-5">
+      <StudentForm addStudent={addStudent} editStudent={updateStudent} updateStudent={updateExistingStudent} />
       <DisplayStudent studentArr={students} deleteStudent={deleteStudent} editStudent={editStudent} />
     </div>
+
   )
 }
 
