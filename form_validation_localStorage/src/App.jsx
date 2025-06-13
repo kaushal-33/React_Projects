@@ -5,7 +5,7 @@ import DisplayStudent from "./components/displayStudent"
 const App = () => {
 
   const [students, setStudents] = useState([])
-
+  const [updateStudent, setUpdateStudent] = useState(null)
   useEffect(() => {
     setStudents(JSON.parse(localStorage.getItem("studentDetails")) || [])
   }, [])
@@ -14,13 +14,36 @@ const App = () => {
   }, [students])
 
   function addStudent(student) {
-    setStudents([...students, student]);
+    if (updateStudent) {
+      setStudents([...students, updateStudent])
+    } else {
+      setStudents([...students, student]);
+    }
+  }
+
+  function deleteStudent(id) {
+    let newstudentList = students.filter((student) => {
+      return student.id !== id;
+    })
+
+    setStudents(newstudentList);
+  }
+
+  function editStudent(editStudent) {
+    setUpdateStudent(editStudent);
+  }
+
+  function updatedStudent(updatedStudent) {
+
+
+
+
   }
 
   return (
-    <div className="h-[80vh] flex">
-      <StudentForm addStudent={addStudent} />
-      <DisplayStudent studentArr={students} />
+    <div className="flex py-5">
+      <StudentForm addStudent={addStudent} editStudent={updateStudent} />
+      <DisplayStudent studentArr={students} deleteStudent={deleteStudent} editStudent={editStudent} />
     </div>
   )
 }

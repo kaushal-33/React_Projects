@@ -1,12 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-const StudentForm = ({ addStudent }) => {
+const StudentForm = ({ addStudent, editStudent, }) => {
 
     const [studentInput, setStudentInput] = useState({
         name: "", course: "1", contact: "", password: "", cPassword: "", gender: ""
     });
 
     const [error, setError] = useState({});
+
+    useEffect(() => {
+        if (editStudent) {
+            setStudentInput(editStudent);
+        }
+    }, [editStudent])
+
     function handleChange(e) {
         setStudentInput({ ...studentInput, [e.target.id]: e.target.value, })
         setError({ ...error, [e.target.id]: "" })
@@ -20,7 +27,7 @@ const StudentForm = ({ addStudent }) => {
         if (studentInput.name.trim() === "") objError.name = "Please enter your name...";
         if (studentInput.gender === "") objError.gender = "Please select your gender...";
         if (studentInput.contact.trim() === "" || studentInput.contact.length != 10) objError.contact = "Please enter valid number...";
-        if (studentInput.password.trim() <= 8) objError.password = "Password must be greater than 7 character or long...";
+        if (studentInput.password.trim().length <= 8) objError.password = "Password must be greater than 7 character or long...";
         if (studentInput.password !== studentInput.cPassword) objError.cPassword = "Passwords do not match...";
         setError(objError)
 
@@ -32,14 +39,14 @@ const StudentForm = ({ addStudent }) => {
         }
     }
     return (
-        <div className="w-3/12 p-5 bg-[#463aca] h-full m-5 rounded-xl">
+        <div className="w-3/12 p-5 bg-[#463aca] m-5 rounded-xl">
             <form className="" onSubmit={handleSubmit}>
                 <div className="my-5">
                     <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2 cursor-pointer" htmlFor="name">
                         Name
                     </label>
                     <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="name" type="text" placeholder="John Doe" onChange={handleChange}
-                        value={studentInput.name} />
+                        value={studentInput.name} name="name" />
                     {
                         error.name && <p className="text-red-500 text-xs italic">{error.name}</p>
                     }
@@ -58,10 +65,10 @@ const StudentForm = ({ addStudent }) => {
                         }} />
                         <span className="text-white">Female</span>
                     </label>
-                    {
-                        error.gender && <p className="text-red-500 text-xs italic">{error.gender}</p>
-                    }
                 </div>
+                {
+                    error.gender && <p className="text-red-500 text-xs italic">{error.gender}</p>
+                }
                 {/* course */}
                 <div className="mt-14 mb-8">
                     <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2 cursor-pointer" htmlFor="course">
@@ -80,7 +87,7 @@ const StudentForm = ({ addStudent }) => {
                         CONTACT
                     </label>
                     <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="contact" type="number" placeholder="0123456789" onChange={handleChange}
-                        value={studentInput.contact} />
+                        value={studentInput.contact} name="contact" />
                     {
                         error.contact && <p className="text-red-500 text-xs italic">{error.contact}</p>
                     }
@@ -91,9 +98,9 @@ const StudentForm = ({ addStudent }) => {
                         password
                     </label>
                     <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="password" type="password" placeholder="* * * * * * * *" onChange={handleChange}
-                        value={studentInput.password} />
+                        value={studentInput.password} name="password" />
                     {
-                        error.password && <p className="text-red-500 text-xs italic">{error.password}</p>
+                        error.password && <p className="text-red-500 text-xs italic mb-3">{error.password}</p>
                     }
                 </div>
                 {/* confirm password */}
@@ -104,11 +111,11 @@ const StudentForm = ({ addStudent }) => {
                     <input className="w-full border-b text-white py-2 px-4 mb-3 outline-none focus:border-0 focus:bg-white focus:text-black  bg-transparent shadow-xl" id="cPassword" type="password" placeholder="* * * * * * * *" onChange={handleChange}
                         value={studentInput.cPassword} />
                     {
-                        error.cPassword && <p className="text-red-500 text-xs italic">{error.cPassword}</p>
+                        error.cPassword && <p className="text-red-500 text-xs italic mb-5">{error.cPassword}</p>
                     }
                 </div>
                 <button className="capitalize bg-white px-8 py-3 rounded-full">
-                    submit
+                    {editStudent ? "update" : "submit"}
                 </button>
             </form>
         </div>
