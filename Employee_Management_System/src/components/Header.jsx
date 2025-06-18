@@ -1,8 +1,13 @@
-import React from 'react'
+import { Link, useNavigate } from "react-router-dom"
 
-const Header = () => {
+const Header = ({ loginUpdate }) => {
+
+    let handleLogin = useNavigate();
+
+    console.log(loginUpdate)
+
     return (
-        <header className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 animate-gradient overflow-hidden">
+        <header className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 animate-gradient overflow-hidden sticky top-0 z-50">
             {/* Abstract Background Elements */}
             <div className="absolute inset-0 opacity-20">
                 <div className="absolute top-0 left-0 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-float" />
@@ -39,29 +44,49 @@ const Header = () => {
                     </div>
                     {/* Navigation */}
                     <nav className="hidden md:flex items-center space-x-8">
-                        <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
+                        <Link to={"/"} className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
                             Home
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-200 transition-all duration-200 group-hover:w-full" />
-                        </a>
-                        <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
+                        </Link>
+                        <Link to={"/about"} className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
                             About
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-200 transition-all duration-200 group-hover:w-full" />
-                        </a>
-                        <a href="#" className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
+                        </Link>
+                        <Link to={"/contact"} className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
                             Contact
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-200 transition-all duration-200 group-hover:w-full" />
-                        </a>
+                        </Link>
+                        {
+                            loginUpdate &&
+                            <Link to={"/employees"} className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
+                                Employees
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-200 transition-all duration-200 group-hover:w-full" />
+                            </Link>
+                        }
                     </nav>
                     <div className="flex items-center space-x-4">
                         {/* Profile */}
                         <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-semibold shadow-lg animate-pulse-glow">
-                                JD
+                                {loginUpdate ? "JD" : "L"}
                             </div>
-                            <div className="hidden sm:block text-white">
-                                <p className="text-sm font-medium">John Doe</p>
-                                <p className="text-xs text-blue-100 opacity-75">Admin</p>
-                            </div>
+                            {
+                                loginUpdate &&
+                                <div className="hidden sm:block text-white">
+                                    <p className="text-sm font-medium">John Doe</p>
+                                    <p className="text-xs text-blue-100 opacity-75">Admin</p>
+                                </div>
+                            }
+                            {
+                                loginUpdate ?
+                                    <button className="btn capitalize px-3 py-1 bg-red-600 rounded-full text-white" onClick={() => handleLogin("/")}>
+                                        logout
+                                    </button> :
+                                    <button className="btn capitalize bg-green-600 px-3 py-1 rounded-full text-white" onClick={() => handleLogin("/login")}>
+                                        login
+                                    </button>
+                            }
+
                         </div>
                         {/* Mobile Menu Button */}
                         <button className="md:hidden p-2 text-white hover:bg-white hover:bg-opacity-20 rounded-lg transition-all duration-200">

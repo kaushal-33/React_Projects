@@ -2,7 +2,7 @@ import React from 'react'
 
 const Home = () => {
     return (
-        <section className="relative bg-black lg:h-[92vh] h-[100%] py-10 flex items-center">
+        <section className="relative bg-black my-vh py-10 flex items-center">
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-30">
                 <div className="absolute top-20 right-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-float" />
@@ -10,7 +10,6 @@ const Home = () => {
             </div>
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left Content */}
                     <div className="animate-slide-up">
                         <h2 className="text-5xl font-bold text-white mb-6 leading-tight">
                             Streamline Your
@@ -46,7 +45,6 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Right Content - Dashboard Preview */}
                     <div className="relative animate-scale-in">
                         <div className="relative bg-gray-800 rounded-2xl p-6 shadow-2xl border border-gray-700">
                             {/* Mock Dashboard */}
@@ -97,7 +95,6 @@ const Home = () => {
                 </div>
             </div>
         </section>
-
     )
 }
 
