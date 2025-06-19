@@ -1,9 +1,15 @@
 import { Link, useNavigate } from "react-router-dom"
 
-const Header = ({ loginUpdate }) => {
-
-    let handleLogin = useNavigate();
-
+const Header = ({ loginUpdate, setLogin }) => {
+    let navigate = useNavigate()
+    let handleLogin = () => {
+        navigate("/login")
+    }
+    let handleLogout = () => {
+        localStorage.setItem("isLogin", JSON.stringify(false))
+        setLogin(false)
+        navigate("/")
+    }
     console.log(loginUpdate)
 
     return (
@@ -58,7 +64,7 @@ const Header = ({ loginUpdate }) => {
                         </Link>
                         {
                             loginUpdate &&
-                            <Link to={"/employees"} className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
+                            <Link to={"/employees-detail"} className="text-white hover:text-blue-200 transition-colors duration-200 relative group">
                                 Employees
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-200 transition-all duration-200 group-hover:w-full" />
                             </Link>
@@ -79,10 +85,10 @@ const Header = ({ loginUpdate }) => {
                             }
                             {
                                 loginUpdate ?
-                                    <button className="btn capitalize px-3 py-1 bg-red-600 rounded-full text-white" onClick={() => handleLogin("/")}>
+                                    <button className="btn capitalize px-3 py-1 bg-red-600 rounded-full text-white" onClick={() => handleLogout()}>
                                         logout
                                     </button> :
-                                    <button className="btn capitalize bg-green-600 px-3 py-1 rounded-full text-white" onClick={() => handleLogin("/login")}>
+                                    <button className="btn capitalize bg-green-600 px-3 py-1 rounded-full text-white" onClick={() => handleLogin()}>
                                         login
                                     </button>
                             }

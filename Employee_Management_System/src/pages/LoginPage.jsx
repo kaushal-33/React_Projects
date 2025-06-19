@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const LoginPage = ({ setLogin }) => {
-
+    let navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -28,10 +29,10 @@ const LoginPage = ({ setLogin }) => {
                 password: ''
             })
             toast.success("Signed in successfully...!")
+            navigate("/employees-detail")
         } else {
             toast.error("Email or Password dosen't match...!")
         }
-
     }
 
     return (
