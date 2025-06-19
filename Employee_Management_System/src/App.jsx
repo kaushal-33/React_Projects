@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import About from './pages/About'
 import Contact from './pages/Contact'
 import EmployeesDetail from './pages/EmployeesDetail'
+import EmployeeForm from './pages/EmployeeForm'
 
 const App = () => {
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<LoginPage setLogin={setLoginStatus} />} />
         <Route path='/employees-detail' element={<EmployeesDetail />} />
+        <Route path='/employees-form' element={<EmployeeForm />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
