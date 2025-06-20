@@ -11,6 +11,16 @@ const EmployeesDetail = () => {
     }, [])
     let navigate = useNavigate();
 
+    function handleDelete(id) {
+        let remainingEmployee = sortedEmployees.filter((employee) => employee.id != id)
+        setSortedEmployees(remainingEmployee)
+        localStorage.setItem("employeesDetail", JSON.stringify(remainingEmployee))
+    }
+
+    function handleUpdate(id) {
+        navigate(`/update-employee-form/${id}`)
+    }
+
     return (
         <section className="relative bg-black min-h-screen py-10">
             {/* Background Elements */}
@@ -81,8 +91,9 @@ const EmployeesDetail = () => {
                                         </td>
                                         <td className="px-6 py-4 text-green-400 font-semibold">{employee.salary}</td>
                                         <td className="text-center">
-                                            <button className="text-white rounded-full capitalize px-3 py-1 bg-green-500">edit</button>
-                                            <button className="text-white rounded-full capitalize px-3 py-1 bg-red-500 ms-2">delete</button>
+                                            <button onClick={() => handleUpdate(employee.id)} className="text-white rounded-full capitalize px-3 py-1 bg-green-500">edit</button>
+                                            <button onClick={() => handleDelete(employee.id)} className="text-white rounded-full capitalize px-3 py-1 bg-red-500 ms-2">delete
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
