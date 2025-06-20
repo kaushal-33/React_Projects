@@ -6,7 +6,7 @@ const About = () => {
             <div className="absolute inset-0 opacity-20">
                 <div className="absolute top-32 left-32 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl animate-float" />
                 <div className="absolute bottom-32 right-32 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-float" style={{ animationDelay: '4s' }} />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl" />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

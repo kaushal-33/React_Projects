@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EmployeesDetail = () => {
 
@@ -15,6 +16,7 @@ const EmployeesDetail = () => {
         let remainingEmployee = sortedEmployees.filter((employee) => employee.id != id)
         setSortedEmployees(remainingEmployee)
         localStorage.setItem("employeesDetail", JSON.stringify(remainingEmployee))
+        toast.error("Employee deleted...!")
     }
 
     function handleUpdate(id) {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EmployeeForm = () => {
 
@@ -17,13 +18,16 @@ const EmployeeForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formData.name && formData.department && formData.salary) {
+        if (formData.name.trim() && formData.department.trim() && formData.salary.trim()) {
             let employeeArr = JSON.parse(localStorage.getItem("employeesDetail")) || []
             let newEmployee = { ...formData, id: Date.now() }
             employeeArr.push(newEmployee)
             localStorage.setItem("employeesDetail", JSON.stringify(employeeArr))
             setFormData({ name: '', department: '', salary: '' });
             navigate("/employees-detail")
+            toast.success("New employee added...!");
+        } else {
+            toast.warning("Must fill all the input fields...!")
         }
     }
     return (

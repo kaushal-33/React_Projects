@@ -2,37 +2,47 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const updateEmployeeForm = () => {
+const UpdateEmployeeForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         department: '',
         salary: ''
     });
+    let navigate = useNavigate();
     let { id } = useParams();
-
     useEffect(() => {
         let employeeArr = JSON.parse(localStorage.getItem("employeesDetail")) || [];
         let updateEmployee = employeeArr.find((employee) => employee.id == id)
-        setFormData(updateEmployee)
-    }, [])
+        if (updateEmployee) {
+            setFormData(updateEmployee);
+        } else {
+            toast.error("Employee not found");
+            navigate("/employees-detail");
+        }
+    }, [id])
 
-    let navigate = useNavigate();
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value })
     };
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        let employeeArr = JSON.parse(localStorage.getItem("employeesDetail")) || [];
-        let updatedEmployeeArr = employeeArr.map((employee) => employee.id == id ? { ...employee, ...formData } : employee)
-        localStorage.setItem("employeesDetail", JSON.stringify(updatedEmployeeArr))
-        navigate("/employees-detail")
-        toast.success("Employee Updated...!")
+        if (formData.name.trim() !== "" && formData.department.trim() !== "" && formData.salary.trim() !== "") {
+            let employeeArr = JSON.parse(localStorage.getItem("employeesDetail")) || [];
+            let updatedEmployeeArr = employeeArr.map((employee) =>
+                employee.id == id ? { ...employee, ...formData } : employee
+            );
+            localStorage.setItem("employeesDetail", JSON.stringify(updatedEmployeeArr));
+            navigate("/employees-detail");
+            toast.success("Employee Updated...!");
+        } else {
+            toast.warning("Fill all the input fields...!");
+        }
     }
     return (
         <section className="bg-gray-800 my-vh flex items-center">
             <div className="bg-gray-800 border border-gray-700 rounded-2xl p-6 shadow-2xl max-w-md w-full mx-auto">
-                <h2 className="text-white text-2xl font-bold mb-6 text-center">Add New Employee</h2>
+                <h2 className="text-white text-2xl font-bold mb-6 text-center">Update Employee</h2>
                 <form onSubmit={handleUpdate} className="space-y-5">
                     <div>
                         <label className="block text-sm text-gray-400 mb-1">Name</label>
@@ -87,4 +97,4 @@ const updateEmployeeForm = () => {
     )
 }
 
-export default updateEmployeeForm
+export default UpdateEmployeeForm

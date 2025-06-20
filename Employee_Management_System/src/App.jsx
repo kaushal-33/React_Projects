@@ -1,15 +1,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// components and pages
+
 import Header from './components/Header'
 import Home from './pages/Home'
-import { useEffect, useState } from 'react'
 import LoginPage from './pages/LoginPage'
-import { ToastContainer } from 'react-toastify';
 import About from './pages/About'
 import Contact from './pages/Contact'
 import EmployeesDetail from './pages/EmployeesDetail'
 import EmployeeForm from './pages/EmployeeForm'
 import ProtectedRoute from './pages/ProtectedRoute'
-import updateEmployeeForm from './pages/updateEmployeeForm'
+import UpdateEmployeeForm from './pages/UpdateEmployeeForm'
 
 const App = () => {
 
@@ -19,11 +23,6 @@ const App = () => {
     let isLogin = JSON.parse(localStorage.getItem("isLogin")) || false
     setLoginStatus(isLogin);
   }, [])
-
-  function updateEmployee(id) {
-
-  }
-
   return (
     <BrowserRouter>
       <Header loginUpdate={loginStatus} setLogin={setLoginStatus} />
@@ -34,7 +33,7 @@ const App = () => {
         <Route path='/login' element={<LoginPage setLogin={setLoginStatus} />} />
         <Route path='/employees-detail' element={<ProtectedRoute Component={EmployeesDetail} />} />
         <Route path='/employees-form' element={<ProtectedRoute Component={EmployeeForm} />} />
-        <Route path='/update-employee-form/:id' element={<ProtectedRoute Component={updateEmployeeForm} />} />
+        <Route path='/update-employee-form/:id' element={<ProtectedRoute Component={UpdateEmployeeForm} />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
